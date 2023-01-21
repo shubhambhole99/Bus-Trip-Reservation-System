@@ -11,10 +11,10 @@ private String Arrivaltime;
 private int Totalseats;
 private int Availableseats;
 private int fare;
-public Bus(int busno, String busname, String busType, String routeFrom, String routeTo, String departuretime,
+public Bus(int busno,String busname, String busType, String routeFrom, String routeTo, String departuretime,
 		String arrivaltime, int totalseats, int availableseats, int fare) {
 	super();
-	Busno = busno;
+	Busno=busno;
 	Busname = busname;
 	BusType = busType;
 	RouteFrom = routeFrom;
@@ -25,6 +25,10 @@ public Bus(int busno, String busname, String busType, String routeFrom, String r
 	Availableseats = availableseats;
 	this.fare = fare;
 }
+public Bus() {
+	// TODO Auto-generated constructor stub
+}
+
 public int getBusno() {
 	return Busno;
 }

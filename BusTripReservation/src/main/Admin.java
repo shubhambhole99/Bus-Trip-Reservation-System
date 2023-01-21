@@ -19,7 +19,7 @@ public class Admin {
 		
 	}
 	if(i==2) {
-		
+		Main.main(args);
 	}
 	
 	sc.close();

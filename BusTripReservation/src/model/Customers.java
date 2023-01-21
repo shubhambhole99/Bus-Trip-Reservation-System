@@ -1,16 +1,16 @@
 package model;
 
 public class Customers {
-private int customerid;
+
 private String username;
 private String password;
 private String name;
 private int age;
 private String address;
-private int mobile;
-public Customers(int customerid, String username, String password, String name, int age, String address, int mobile) {
+private String mobile;
+public Customers( String username, String password, String name, int age, String address, String mobile) {
 	super();
-	this.customerid = customerid;
+
 	this.username = username;
 	this.password = password;
 	this.name = name;
@@ -21,12 +21,7 @@ public Customers(int customerid, String username, String password, String name, 
 public Customers() {
 	// TODO Auto-generated constructor stub
 }
-public int getCustomerid() {
-	return customerid;
-}
-public void setCustomerid(int customerid) {
-	this.customerid = customerid;
-}
+
 public String getUsername() {
 	return username;
 }
@@ -57,15 +52,15 @@ public String getAddress() {
 public void setAddress(String address) {
 	this.address = address;
 }
-public int getMobile() {
+public String getMobile() {
 	return mobile;
 }
-public void setMobile(int mobile) {
+public void setMobile(String mobile) {
 	this.mobile = mobile;
 }
 @Override
 public String toString() {
-	return "Customers [customerid=" + customerid + ", username=" + username + ", password=" + password + ", name="
+	return "Customers [ username=" + username + ", password=" + password + ", name="
 			+ name + ", age=" + age + ", address=" + address + ", mobile=" + mobile + "]";
 }
 
