@@ -24,7 +24,7 @@ public class ShowAllBuses {
 				
 				if(bus.size()>0) {
 					System.out.printf("+----------------------+------------+--------+-------------------------+----------------+----------------+-------------+-----------------+--------------+%n");
-					System.out.printf("| %-15s | %-15s | %-15s | %-6s | %-10s | %-10s | %-10s | %-11s | %-15s | %-12s |", "BusNo", "BusName", "BusType", "RouteFrom","RouteTo", "Arrival Time", "Departure Time", "Total Seats", "Available Seats", "Ticket Price");
+					System.out.printf("| %-15s | %-15s | %-15s | %-15s | %-15s | %-23s | %-23s | %-11s | %-15s | %-12s |", "BusNo", "BusName", "BusType", "RouteFrom","RouteTo", "Arrival Time", "Departure Time", "Total Seats", "Available Seats", "Ticket Price");
 					System.out.println();
 					System.out.printf("+----------------------+------------+--------+-------------------------+----------------+----------------+-------------+-----------------+--------------+%n");
 					
@@ -33,7 +33,7 @@ public class ShowAllBuses {
 								}
 								bus.forEach(e -> {
 //									System.out.println(s);
-									System.out.println(System.out.printf("| %-15s | %-15s | %-15s | %-6s | %-10s | %-10s | %-10s | %-11s | %-15s | %-12s |",e.getBusno(),e.getBusname(),e.getBusType(),e.getRouteFrom(),e.getRouteTo(),e.getArrivaltime(),e.getDeparturetime(),e.getTotalseats(),e.getAvailableseats(),e.getFare()));
+									System.out.println(System.out.printf("| %-15s | %-15s | %-15s | %-15s | %-15s | %-23s | %-23s | %-11s | %-15s | %-12s |",e.getBusno(),e.getBusname(),e.getBusType(),e.getRouteFrom(),e.getRouteTo(),e.getArrivaltime(),e.getDeparturetime(),e.getTotalseats(),e.getAvailableseats(),e.getFare()));
 								});
 			} catch (BusException e) {
 				// TODO Auto-generated catch block

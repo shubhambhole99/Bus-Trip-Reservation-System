@@ -2,6 +2,12 @@ package main;
 
 import java.util.Scanner;
 
+import usecases.AddBus;
+import usecases.ConfirmTicket;
+import usecases.ExitApp;
+import usecases.LogoutAdmin;
+import usecases.ShowAllBuses;
+
 public class AdminPanel {
 
 	public static void main(String[] args) {
@@ -19,19 +25,19 @@ public class AdminPanel {
 		
 		int i = sc.nextInt();
 		if(i==1) {
-			
+			AddBus.main(args);
 		}
 		if(i==2) {
-			
+			ConfirmTicket.main(args);
 		}
 		if(i==3) {
-			
+			ShowAllBuses.main(args);
 		}
 		if(i==4) {
-			
+			LogoutAdmin.main(args);
 		}
 		if(i==5) {
-			
+			ExitApp.main(args);
 		}
 	
 	}

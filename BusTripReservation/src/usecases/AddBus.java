@@ -18,20 +18,21 @@ public static void main(String[] args) {
 		String name = sc.nextLine();
 		System.out.println("Enter Bus Type:");
 		System.out.println("AC/NON-AC/DELUXE/VIP/ECONOMY");
-		String type = sc.next();		
+		String type = sc.nextLine();		
 		System.out.println("Enter Destination of departure");
-		String from = sc.next();
+		String from = sc.nextLine();
 		System.out.println("Enter Destination of arrival:");
-		String to = sc.next();
-		System.out.println("Enter Arrival Time in yyyy-mm-dd hh:mm:ss");
-		String arrivalTime = sc.next();
+		String to = sc.nextLine();
 		System.out.println("Enter Departure Time in yyyy-mm-dd hh:mm:ss:");
-		String departureTime = sc.next();
+		String departureTime = sc.nextLine();
+		System.out.println("Enter Arrival Time in yyyy-mm-dd hh:mm:ss");
+		String arrivalTime = sc.nextLine();
 		System.out.println("Enter No of seats:");
 		int seats = sc.nextInt();
+		sc.nextLine();
 		System.out.println("Enter Fare:");
 		int price = sc.nextInt();
-//		
+//		2023-02-12 23:22:20
 		Bus bus = new Bus();
 //		Bus bus=new Bus("BomAmr","deluxe","Bombay","Amritsar","13:20:00","23:10:20",30,30,4000);
 		bus.setBusname(name);

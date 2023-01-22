@@ -4,6 +4,7 @@ package dao;
 import java.util.List;
 
 import exception.CustomerException;
+import model.BookingHistory;
 import model.Bus;
 import model.Customers;
 
@@ -20,5 +21,7 @@ public List<Bus> ShowBus(String from, String to, int seats) throws CustomerExcep
 public String CancelTicket() throws CustomerException;
 
 public String BookTicket(int busNo, int seats) throws CustomerException;
+
+public List<BookingHistory> BookingHistory() throws CustomerException;
 
 }

@@ -6,10 +6,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import exception.AdminException;
 import exception.BusException;
 import model.Bus;
+import model.Customers;
 import utility.DButil;
 
 public class AdminDaoImpl implements AdminDao{
@@ -123,7 +125,85 @@ List<Bus> al = new ArrayList<>();
 		
 		return al;
 	}
-	
+	public Customers ConfirmTicket() throws BusException {
+		Customers cust = new Customers();
+			try (Connection conn = DButil.provideConnection()){
+				PreparedStatement ps = conn.prepareStatement("select * from bookings");
+				
+				
+				ResultSet rs = ps.executeQuery();
+				boolean flag = false;
+				int count = 1;
+				while(rs.next()) {
+					flag = true;
+					if(count == 1) {
+						System.out.printf("+------------+----------------------+------------+-------------------------+%n");
+						System.out.printf("| %-10s | %-20s | %-10s | %-15s | %-23s |%n", "Booking ID","CustomerID", "Bus No","Confirm", "Seats");
+						System.out.printf("+------------+----------------------+------------+-------------------------+%n");
+						count++;
+					}
+					System.out.printf("| %-10s | %-20s | %-10s | %-15s | %-23s |%n", rs.getInt("bookingid"), rs.getInt("customerid"), rs.getInt("busno"), rs.getBoolean("confirm"),rs.getInt("seats"));
+				}
+			
+			if(flag) {
+				Scanner sc = new Scanner(System.in);
+				System.out.println("");
+				System.out.println("To confirm ticket");
+				System.out.println("Enter Booking ID:");
+				int bid = sc.nextInt();
+				
+				PreparedStatement ps1 = conn.prepareStatement("update bookings set confirm = 1 where bookingid = ?");
+				ps1.setInt(1, bid);
+				
+				int x = ps1.executeUpdate();
+				
+				if(x > 0) {
+					PreparedStatement ps3 = conn.prepareStatement("select seats from bookings where bookingid = ?");
+					ps3.setInt(1, bid);
+					
+					ResultSet rs3 = ps3.executeQuery();
+					
+					if(rs3.next()) {
+						PreparedStatement ps4 = conn.prepareStatement("update bus set availableseats = availableseats - ? where busno = (select busno from bookings where bookingid = ?)");
+						ps4.setInt(1, rs3.getInt("seats"));
+						ps4.setInt(2, bid);
+						
+						int k = ps4.executeUpdate();
+						if(k>0) {
+							System.out.println("");
+							System.out.println("Booking confirmed.");
+							
+							PreparedStatement ps2 = conn.prepareStatement("select * from customers where customerid = (select customerid from bookings where bookingid = ?)");
+							ps2.setInt(1, bid);
+							
+							ResultSet rs2 = ps2.executeQuery();
+							
+							if(rs2.next()) {
+								cust.setName(rs2.getString("name"));
+								cust.setAge(rs2.getInt("age"));
+								cust.setAddress(rs2.getString("address"));
+								cust.setMobile(rs2.getString("mobile"));
+							} else {
+								throw new BusException("Customer not found!");
+							}
+						}
+					}
+					
+					
+				} else {
+					throw new BusException("Ticket not confirmed.");
+				}
+			} else {
+				throw new BusException("No confirmation pendings.");
+			}
+				
+		} catch (SQLException e) {
+			throw new BusException(e.getMessage());
+		}
+		
+		return cust;
+	}
+
 
 	@Override
 	public String Logout() throws AdminException {
@@ -131,5 +211,8 @@ List<Bus> al = new ArrayList<>();
 		String message="Logout Successful";
 		return message;
 	}
+
+	
+
 
 }

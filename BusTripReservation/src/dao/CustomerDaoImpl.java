@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import exception.CustomerException;
+import model.BookingHistory;
 import model.Bus;
 import model.Customers;
 import utility.DButil;
@@ -206,11 +207,11 @@ public String CancelTicket() throws CustomerException {
 				flag = true;
 				if(count == 1) {
 					System.out.printf("+------------+----------------------+------------+-------------------------+%n");
-					System.out.printf("| %-10s | %-20s | %-10s | %-23s |%n", "Booking ID", "Bus Name", "Bus No", "Bus Route");
+					System.out.printf("| %-10s | %-20s | %-10s | %-15s | %-23s |%n", "Booking ID","CustomerID", "Bus Name", "Bus No", "Bus Route");
 					System.out.printf("+------------+----------------------+------------+-------------------------+%n");
 					count++;
 				}
-				System.out.printf("| %-10s | %-20s | %-10s | %-23s |%n", rs.getInt("bookingid"), rs.getInt("customerid"), rs.getInt("busno"), rs.getBoolean("confirm"),rs.getInt("seats"));
+				System.out.printf("| %-10s | %-20s | %-10s | %-15s | %-23s |%n", rs.getInt("bookingid"), rs.getInt("customerid"), rs.getInt("busno"), rs.getBoolean("confirm"),rs.getInt("seats"));
 			}
 			
 			
@@ -242,4 +243,47 @@ public String CancelTicket() throws CustomerException {
 	e.printStackTrace();
 }
 					return message;
-				}}
+				}
+public List<BookingHistory> BookingHistory() throws CustomerException {
+	List<BookingHistory> bl = new ArrayList<>();
+	
+	try (Connection conn = DButil.provideConnection()) {
+		
+		PreparedStatement ps = conn.prepareStatement("select s.bookingid,b.busno,b.busname, b.routefrom, b.routeto, s.seats,b.fare from bus b INNER JOIN bookings s ON b.busno = s.busno AND s.customerid = ?");
+		
+		ps.setInt(1, cusid);
+		
+		ResultSet rs = ps.executeQuery();
+		
+		while(rs.next()) {
+			BookingHistory bk = new BookingHistory();
+			bk.setBid(rs.getInt("s.bookingid"));
+			bk.setBusName(rs.getString("b.busname"));
+			bk.setFrom(rs.getString("b.routefrom"));
+			bk.setTo(rs.getString("b.routeto"));
+			bk.setFare(rs.getInt("b.fare"));
+			bk.setSeats(rs.getInt("s.seats"));
+			
+			bl.add(bk);
+		}
+		 
+		if(bl.size() == 0) {
+			throw new CustomerException("No bookings found!");
+		}
+		
+	} catch (SQLException e) {
+		throw new CustomerException(e.getMessage());
+	}
+		
+	return bl;
+}
+public String Logout() throws CustomerException {
+	
+	cusid = 0;
+	
+	return "Thank You for visiting!";
+}
+
+}
+
+

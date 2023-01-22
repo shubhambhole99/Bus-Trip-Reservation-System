@@ -2,6 +2,8 @@ package main;
 
 import java.util.Scanner;
 
+import usecases.LoginAdmin;
+
 public class Admin {
 
 	public static void main(String[] args) {
@@ -16,7 +18,7 @@ public class Admin {
 	System.out.println();
 	
 	if(i==1) {
-		
+		LoginAdmin.main(args);
 	}
 	if(i==2) {
 		Main.main(args);

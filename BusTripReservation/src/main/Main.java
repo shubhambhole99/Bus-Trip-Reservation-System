@@ -2,6 +2,8 @@ package main;
 
 import java.util.Scanner;
 
+import usecases.ExitApp;
+
 public class Main {
 
 	public static void main(String[] args) {
@@ -20,13 +22,13 @@ public class Main {
 		System.out.println();
 		int i=sc.nextInt();
 		if(i==1) {
-//			
+			Admin.main(args);
 		}
 		else if(i==2) {
-			
+			Customer.main(args);
 		}
 		else if(i==3) {
-			
+			ExitApp.main(args);
 		}
 		else {
 			System.out.println("Select a valid option");
