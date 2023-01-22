@@ -8,7 +8,9 @@ public class BookingHistory {
 	private String to;
 	private int seats;
 	private int fare;
-	public BookingHistory(int bid, String busName, String from, String to, int seats, int fare) {
+	private int confirm;
+	
+	public BookingHistory(int bid, String busName, String from, String to, int seats, int fare, int confirm) {
 		super();
 		this.bid = bid;
 		this.busName = busName;
@@ -16,6 +18,7 @@ public class BookingHistory {
 		this.to = to;
 		this.seats = seats;
 		this.fare = fare;
+		this.confirm = confirm;
 	}
 	public BookingHistory() {
 		// TODO Auto-generated constructor stub
@@ -56,10 +59,16 @@ public class BookingHistory {
 	public void setFare(int fare) {
 		this.fare = fare;
 	}
+	public int getConfirm() {
+		return confirm;
+	}
+	public void setConfirm(int i) {
+		this.confirm = i;
+	}
 	@Override
 	public String toString() {
 		return "BookingHistory [bid=" + bid + ", busName=" + busName + ", from=" + from + ", to=" + to + ", seats="
-				+ seats + ", fare=" + fare + "]";
+				+ seats + ", fare=" + fare + ", confirm=" + confirm + "]";
 	}
 	
 	

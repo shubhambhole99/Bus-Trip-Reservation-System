@@ -5,6 +5,7 @@ import java.util.List;
 import dao.AdminDao;
 import dao.AdminDaoImpl;
 import exception.BusException;
+import main.AdminPanel;
 import model.Bus;
 
 public class ShowAllBuses {
@@ -35,9 +36,12 @@ public class ShowAllBuses {
 //									System.out.println(s);
 									System.out.println(System.out.printf("| %-15s | %-15s | %-15s | %-15s | %-15s | %-23s | %-23s | %-11s | %-15s | %-12s |",e.getBusno(),e.getBusname(),e.getBusType(),e.getRouteFrom(),e.getRouteTo(),e.getArrivaltime(),e.getDeparturetime(),e.getTotalseats(),e.getAvailableseats(),e.getFare()));
 								});
+								AdminPanel.main(args);
 			} catch (BusException e) {
 				// TODO Auto-generated catch block
+				AdminPanel.main(args);
 				e.printStackTrace();
+				
 			}
 //		
 	

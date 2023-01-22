@@ -248,7 +248,7 @@ public List<BookingHistory> BookingHistory() throws CustomerException {
 	
 	try (Connection conn = DButil.provideConnection()) {
 		
-		PreparedStatement ps = conn.prepareStatement("select s.bookingid,b.busno,b.busname, b.routefrom, b.routeto, s.seats,b.fare from bus b INNER JOIN bookings s ON b.busno = s.busno AND s.customerid = ?");
+		PreparedStatement ps = conn.prepareStatement("select s.bookingid,b.busno,b.busname, b.routefrom, b.routeto, s.seats,b.fare,s.confirm from bus b INNER JOIN bookings s ON b.busno = s.busno AND s.customerid = ?");
 		
 		ps.setInt(1, cusid);
 		
@@ -262,6 +262,7 @@ public List<BookingHistory> BookingHistory() throws CustomerException {
 			bk.setTo(rs.getString("b.routeto"));
 			bk.setFare(rs.getInt("b.fare"));
 			bk.setSeats(rs.getInt("s.seats"));
+			bk.setConfirm(rs.getInt("s.confirm"));
 			
 			bl.add(bk);
 		}
