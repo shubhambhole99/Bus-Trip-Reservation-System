@@ -1,7 +1,7 @@
 # Bus Ticket Reservation System
 
 # Preview
-BusDhundo is an Bus ticket reservation system that enables users to book and purchase bus tickets for their preferred travel routes. It offers users the convenience of browsing through available bus schedules, selecting their preferred travel date and time, and making payments securely online.
+Bus ticket reservation system that enables users to book and purchase bus tickets for their preferred travel routes. It offers users the convenience of browsing through available bus schedules, selecting their preferred travel date and time, and making payments securely online.
 
 
 ## Flow Diagram
