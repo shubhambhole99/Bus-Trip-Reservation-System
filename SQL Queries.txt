@@ -1,0 +1,67 @@
+Admin Side Queries
+### AddBuscusid
+insert into bus values(?,?,?,?,?,?,?,?,?,?);
+Parameters by Order
+1=> busno
+2=> Busname
+3=> BusType
+4=> RouteFrom
+5=> RouteTo
+6=> Departuretime
+7=> Arrivaltime
+8=> Totalseats
+9=> Availableseats
+10=>Fare
+
+### ShowAllBuses
+Select * from Bus;
+
+### ConfirmTicket
+1.select * from bookings;
+2.update bookings set confirm = 1 where bookingid = ?;
+3.select seats from bookings where bookingid = ?;
+4.update bus set availableseats = availableseats - ? where busno = (select busno from bookings where bookingid = ?);
+
+First Admin views all bookings then selects one booking id to confirm
+In the third query the admin fetches the no of seats required in the booking
+In the final query the admin reduces the no of seats of the particular bus
+
+
+Customer Side Queries
+
+### Register Customer
+insert into customers values(?,?,?,?,?,?,?);
+Parameters by Order
+1=> cusid
+2=> cusPassword
+3=> cusUsername
+4=> cusName
+5=> cusAge
+6=> cusAddress
+7=> cusMobile
+
+### Login Customer
+select * from customers where username=? AND password=?;
+
+### ShowBus
+select * from bus where routefrom = ? AND routeto=? AND availableseats >= ?;
+
+### Book Ticket
+insert into bookings values (?,?,?,?,?);
+1=>bookingid
+2=>cusid
+3=>busNo
+4=>confirm status
+5=>seats
+
+### Cancel Ticket
+1.select * from bookings where customerid = ?;
+2.delete from bookings where bookingid = ?
+
+### BookingHistory
+select s.bookingid,b.busno,b.busname, b.routefrom, b.routeto, s.seats,b.fare,s.confirm 
+from bus b 
+INNER JOIN bookings s 
+ON b.busno = s.busno 
+where s.customerid = ?
+
